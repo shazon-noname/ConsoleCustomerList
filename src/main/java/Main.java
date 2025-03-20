@@ -11,7 +11,7 @@ public class Main {
 
             if (command.equals("help")) {
                 System.out.println("Список команд:");
-                System.out.println("add Имя Телефон Email - добавить клиента");
+                System.out.println("add Имя, Фамилия, Email, Телефон,  - добавить клиента");
                 System.out.println("list - вывести список клиентов");
                 System.out.println("remove Имя - удалить клиента");
                 System.out.println("exit - выход");
