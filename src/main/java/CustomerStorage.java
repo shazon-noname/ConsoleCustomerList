@@ -31,11 +31,30 @@ public class CustomerStorage {
             String email = components[2];
             String phone = components[3];
 
+            if (storage.containsKey(email)) {
+                String errorMessage = "Клієнт з email " + email + " вже існує";
+                errorsLogger.error(errorMessage);
+                throw new IllegalArgumentException(errorMessage);
+            }
+
+            if (isValidName(name)) {
+                String errorMessage = "Невірний формат імені: " + name;
+                errorsLogger.error(errorMessage);
+                throw new IllegalArgumentException(errorMessage);
+            }
+
+            if (isValidName(surname)) {
+                String errorMessage = "Невірний формат прізвища: " + surname;
+                errorsLogger.error(errorMessage);
+                throw new IllegalArgumentException(errorMessage);
+            }
+
             if (!isValidEmail(email)) {
                 String errorMessage = "Невірний формат email: " + email;
                 errorsLogger.error(errorMessage);
                 throw new InvalidEmailException(errorMessage);
             }
+
             if (!isValidNumber(phone)) {
                 String errorMessage = "Невірний формат номеру, очікується український формат номеру: +380XXXXXXXXX або 0XXXXXXXXX";
                 errorsLogger.error(errorMessage);
@@ -53,6 +72,10 @@ public class CustomerStorage {
             errorsLogger.error("Невідома помилка при додавані клієнта: {}", e.getMessage());
             System.out.println("Сталася невідома помилка: " + e.getMessage());
         }
+    }
+
+    private boolean isValidName(String name) {
+        return name.matches("[A-Za-z]+");
     }
 
     public void listCustomers() {
