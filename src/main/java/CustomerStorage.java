@@ -19,6 +19,11 @@ public class CustomerStorage {
     public void addCustomer(String data) {
         queriesLogger.info("Запит на додавання клієнта: {}", data);
         try {
+            if (data.length() <= 4) {
+                String errorMessage = "Невірна кількість переданих даних. Очікується формат: add name surname email phone";
+                errorsLogger.error(errorMessage);
+                throw new InvalidComponentsCountException(errorMessage);
+            }
             String[] components = data.split("\\s+", 4);
             if (components.length != 4) {
                 String errorMessage = "Невірна кількість переданих даних. Очікується формат: add name surname email phone";
