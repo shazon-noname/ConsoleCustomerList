@@ -11,23 +11,23 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Введите команду: ");
+            System.out.println("Введіть команду: ");
             String command = scanner.nextLine();
 
             if (command.equals("help")) {
                 System.out.println("Список команд:");
-                System.out.println("add Имя, Фамилия, Email, Телефон,  - добавить клиента");
-                System.out.println("list - вывести список клиентов");
-                System.out.println("remove Имя - удалить клиента");
-                System.out.println("exit - выход");
+                System.out.println("add Ім’я, Прізвище, Email, Телефон - додати клієнта");
+                System.out.println("list - вивести список клієнтів");
+                System.out.println("remove Ім’я - видалити клієнта");
+                System.out.println("exit - вихід");
             } else if (command.startsWith("add")) {
                 if (command.length() <= 4) {
-                    errorsLogger.error("Ошибка: после 'add' нужно указать данные (Имя, Фамилия, Email, Телефон)");
+                    errorsLogger.error("Помилка: після 'add' потрібно вказати дані (Ім’я, Прізвище, Email, Телефон)");
                     continue;
                 }
                 String data = command.substring(4);
                 if (data.isEmpty()) {
-                    errorsLogger.error("Ошибка: данные не могут быть пустыми");
+                    errorsLogger.error("Помилка: дані не можуть бути порожніми");
                     continue;
                 }
                 storage.addCustomer(data);
@@ -35,19 +35,19 @@ public class Main {
                 storage.listCustomers();
             } else if (command.startsWith("remove")) {
                 if(command.length() <= 7) {
-                    errorsLogger.error("Ошибка: после 'remove' укажите имя клиента");
+                    errorsLogger.error("Помилка: після 'remove' вкажіть ім’я клієнта");
                     continue;
                 }
                 String name = command.substring(7);
                 if (name.isEmpty()) {
-                    errorsLogger.error("Ошибка: имя не может быть пустым");
+                    errorsLogger.error("Помилка: ім’я не може бути порожнім");
                     continue;
                 }
                 storage.removeCustomer(name);
             } else if (command.equals("exit")) {
                 break;
             } else {
-                errorsLogger.error("Неизвестная команда");
+                errorsLogger.error("Невідома команда");
             }
         }
     }
